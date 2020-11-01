@@ -6,14 +6,10 @@ router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/index.html"));
  });
  
- router.get("/exercise", (req, res) => {
+router.get("/exercise", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/exercise.html"));
  });
- 
- router.get("/exercise?", (req, res) => {
-    res.sendFile(__dirname + "../public/exercise.html");
- });
- 
+  
 router.get("/stats", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/stats.html"));
  });
@@ -30,7 +26,7 @@ router.get("/api/workouts", (req, res) => {
   });
   
   router.put("/api/workouts/:id", ({ params, body }, res) => {
-    console.log(body);
+    //console.log(body);
     Transaction.findByIdAndUpdate(params.id,
        {
           $push: {
@@ -50,7 +46,7 @@ router.get("/api/workouts", (req, res) => {
   });
   
   router.post("/api/workouts", ({ body }, res) => {
-    console.log(body);
+    //console.log(body);
     Transaction.create(body)
        .then(workoutdb => {
           res.json(workoutdb);
@@ -58,9 +54,7 @@ router.get("/api/workouts", (req, res) => {
        .catch(err => {
           res.json(err);
        });
-  
-    res.send("Recieved a POST request")
-  });
+   });
   
   router.get("/api/workouts/range", (req, res) => {
     Transaction.find({}).limit(7)
